@@ -2,14 +2,12 @@ import React from 'react'
 import './BackArrow.scss'
 import { IBackArrowProps } from 'Interfaces/BackArrow'
 
-const BackArrow = ({ onClick, className = '', children }: IBackArrowProps) => {
-  const item = (
+const BackArrow: React.FC<IBackArrowProps> = ({ onClick, className = '', children }) => (
+  <li>
     <a onClick={onClick} className={`BackArrow ${className}`}>
       {children}
     </a>
-  )
-
-  return <li>{item}</li>
-}
+  </li>
+)
 
 export default BackArrow
