@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import Backdrop from '../Backdrop/Backdrop'
 import { ISideNavProps } from 'Interfaces/SideNav'
+import './SideNav.scss'
 
 type PreProcessedNavItems = {
   positions: string[]
@@ -20,7 +21,7 @@ const SideNav = ({
   variant = 'temporary',
   style = {},
 }: ISideNavProps) => {
-  let positions: string[] = []
+  const positionsRef = React.useRef<string[]>([])
 
   const [state, setState] = useState<PreProcessedNavItems>({
     positions: [],
@@ -30,16 +31,17 @@ const SideNav = ({
 
   useEffect(() => {
     if (navItems) {
-      positions = new Array<string>()
+      positionsRef.current = new Array<string>()
       const preProcessedNavItems: any[] = []
       preProcessNavItems(preProcessedNavItems)
 
       setState({
         navItems: navItems,
-        positions: positions,
+        positions: positionsRef.current,
         preProcessedNavItems: [...preProcessedNavItems],
       })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [navItems])
 
   const preProcessNavItems = (tree: any) => {
@@ -50,7 +52,7 @@ const SideNav = ({
     if (navItem.childrenItems) {
       const navItemsChildren: any[] = []
       tree.push(currentNavItemsIndex)
-      positions.push(currentNavItemsIndex === 0 ? '0' : '100%')
+      positionsRef.current.push(currentNavItemsIndex === 0 ? '0' : '100%')
 
       navItem.childrenItems.forEach((navItemChild: any) => {
         let child = -1
@@ -63,16 +65,8 @@ const SideNav = ({
           name: navItemChild.name,
           renderItem: navItemChild.renderItem,
           disableClose: navItemChild.disableClose,
-          // link: !navItemChild.navItemsChildren ? navItemChild.link : null,
-          // className: !navItemChild.navItemsChildren
-          //   ? navItemChild.className
-          //   : "",
           className: navItemChild.className || '',
-          // icon: navItemChild.icon,
           itemProps: navItemChild.itemProps,
-          // style: navItemChild.style,
-          // className
-          // styleRightArrow: navItemChild.styleRightArrow
         })
         dfs(navItemChild, tree.length, tree, currentNavItemsIndex, navItem.name)
       })
@@ -84,21 +78,13 @@ const SideNav = ({
         headName: navItem.name,
         posXIndex: currentNavItemsIndex,
         navItemsChildren: navItemsChildren,
-        // styleChildrenContainer: navItem.styleChildrenContainer,
-        // styleBackArrow: navItem.styleBackArrow,
-        // styleHeadItem: navItem.styleHeadItem,
         classes: navItem.classes,
       }
     }
   }
 
   return (
-    <div
-      style={{
-        // ...style,
-        display: variant === 'permanent' ? 'block' : 'fixed',
-      }}
-    >
+    <div className={variant === 'permanent' ? 'permanentDisplay' : 'fixedDisplay'}>
       {!hideBackdrop && variant !== 'permanent' && <Backdrop clicked={onClose} show={open} zIndex={zIndex} />}
       <SideDrawer
         open={open || variant === 'permanent'}
