@@ -5,7 +5,6 @@ export interface ISideDrawerProps {
   navItems: never[]
   positions: string[]
   open: boolean
-  // clickedLink: () => void | undefined;
   clickedLink: any
   placement: Placement
   zIndex: any

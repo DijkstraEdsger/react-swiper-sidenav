@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
-import SideDrawer from "../SideDrawer/SideDrawer";
-import Backdrop from "../Backdrop/Backdrop";
-import { ISideNavProps } from "Interfaces/SideNav";
+import React, { useEffect, useState } from 'react'
+import SideDrawer from '../SideDrawer/SideDrawer'
+import Backdrop from '../Backdrop/Backdrop'
+import { ISideNavProps } from 'Interfaces/SideNav'
+import './SideNav.scss'
 
 type PreProcessedNavItems = {
-  positions: string[];
-  navItems: any;
-  preProcessedNavItems: any[];
-};
+  positions: string[]
+  navItems: any
+  preProcessedNavItems: any[]
+}
 
 const SideNav = ({
   navItems,
@@ -17,51 +18,46 @@ const SideNav = ({
   children,
   placement,
   hideBackdrop = false,
-  variant = "temporary",
+  variant = 'temporary',
   style = {},
 }: ISideNavProps) => {
-  let positions: string[] = [];
+  const positionsRef = React.useRef<string[]>([])
 
   const [state, setState] = useState<PreProcessedNavItems>({
     positions: [],
     navItems: {},
     preProcessedNavItems: [],
-  });
+  })
 
   useEffect(() => {
     if (navItems) {
-      positions = new Array<string>();
-      const preProcessedNavItems: any[] = [];
-      preProcessNavItems(preProcessedNavItems);
+      positionsRef.current = new Array<string>()
+      const preProcessedNavItems: any[] = []
+      preProcessNavItems(preProcessedNavItems)
 
       setState({
         navItems: navItems,
-        positions: positions,
+        positions: positionsRef.current,
         preProcessedNavItems: [...preProcessedNavItems],
-      });
+      })
     }
-  }, [navItems]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [navItems])
 
   const preProcessNavItems = (tree: any) => {
-    dfs(navItems, 0, tree, -1, "");
-  };
+    dfs(navItems, 0, tree, -1, '')
+  }
 
-  const dfs = (
-    navItem: any,
-    currentNavItemsIndex: number,
-    tree: any,
-    parent: number,
-    parentName: string
-  ) => {
+  const dfs = (navItem: any, currentNavItemsIndex: number, tree: any, parent: number, parentName: string) => {
     if (navItem.childrenItems) {
-      const navItemsChildren: any[] = [];
-      tree.push(currentNavItemsIndex);
-      positions.push(currentNavItemsIndex === 0 ? "0" : "100%");
+      const navItemsChildren: any[] = []
+      tree.push(currentNavItemsIndex)
+      positionsRef.current.push(currentNavItemsIndex === 0 ? '0' : '100%')
 
       navItem.childrenItems.forEach((navItemChild: any) => {
-        let child = -1;
+        let child = -1
         if (navItemChild.childrenItems) {
-          child = tree.length;
+          child = tree.length
         }
         navItemsChildren.push({
           child: child,
@@ -69,25 +65,11 @@ const SideNav = ({
           name: navItemChild.name,
           renderItem: navItemChild.renderItem,
           disableClose: navItemChild.disableClose,
-          // link: !navItemChild.navItemsChildren ? navItemChild.link : null,
-          // className: !navItemChild.navItemsChildren
-          //   ? navItemChild.className
-          //   : "",
-          className: navItemChild.className || "",
-          // icon: navItemChild.icon,
+          className: navItemChild.className || '',
           itemProps: navItemChild.itemProps,
-          // style: navItemChild.style,
-          // className
-          // styleRightArrow: navItemChild.styleRightArrow
-        });
-        dfs(
-          navItemChild,
-          tree.length,
-          tree,
-          currentNavItemsIndex,
-          navItem.name
-        );
-      });
+        })
+        dfs(navItemChild, tree.length, tree, currentNavItemsIndex, navItem.name)
+      })
 
       tree[currentNavItemsIndex] = {
         parent: parent,
@@ -96,29 +78,19 @@ const SideNav = ({
         headName: navItem.name,
         posXIndex: currentNavItemsIndex,
         navItemsChildren: navItemsChildren,
-        // styleChildrenContainer: navItem.styleChildrenContainer,
-        // styleBackArrow: navItem.styleBackArrow,
-        // styleHeadItem: navItem.styleHeadItem,
         classes: navItem.classes,
-      };
+      }
     }
-  };
+  }
 
   return (
-    <div
-      style={{
-        // ...style,
-        display: variant === "permanent" ? "block" : "fixed",
-      }}
-    >
-      {!hideBackdrop && variant !== "permanent" && (
-        <Backdrop clicked={onClose} show={open} zIndex={zIndex} />
-      )}
+    <div className={variant === 'permanent' ? 'permanentDisplay' : 'fixedDisplay'}>
+      {!hideBackdrop && variant !== 'permanent' && <Backdrop clicked={onClose} show={open} zIndex={zIndex} />}
       <SideDrawer
-        open={open || variant === "permanent"}
+        open={open || variant === 'permanent'}
         navItems={state.preProcessedNavItems as never[]}
         positions={state.positions}
-        clickedLink={variant === "temporary" ? onClose : undefined}
+        clickedLink={variant === 'temporary' ? onClose : undefined}
         menuHead={children}
         placement={placement}
         zIndex={zIndex}
@@ -126,7 +98,7 @@ const SideNav = ({
         style={style}
       />
     </div>
-  );
-};
+  )
+}
 
-export default SideNav;
+export default SideNav
