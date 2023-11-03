@@ -28,7 +28,7 @@ const NavItem = ({
   if (child !== -1) {
     if (hasRenderItem) {
       item = (
-        <div role='button' onClick={clicked} style={{ cursor: 'pointer' }}>
+        <div role='button' onClick={clicked}>
           {children}
         </div>
       )

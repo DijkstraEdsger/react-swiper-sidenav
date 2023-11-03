@@ -36,11 +36,8 @@
 }
 
 .NavItemRightArrow {
-  /* box-sizing: border-box; */
   width: 100%;
   background-color: inherit;
-  /* padding-bottom: 2px; */
-  /* cursor: pointer; */
 }
 
 .SliceItem {
@@ -48,7 +45,6 @@
   box-sizing: border-box;
   padding: 12px 24px 12px 32px;
   font-size: 14px;
-  /* color: #111; */
   color: inherit;
   display: flex;
   flex-direction: row;
@@ -67,7 +63,7 @@
 }
 
 .SliceItem::after {
-  content: "";
+  content: '';
   border: 8px solid transparent;
   border-left-color: #000;
   transform: translateX(8px);
@@ -84,10 +80,6 @@
 .LinkItem.active {
   background-color: #ccc;
 }
-
-/* .NavItem:hover {
-  background-color: #eaeded;
-} */
 
 .NavItemRightArrow:hover {
   background-color: #eaeded;
@@ -132,10 +124,4 @@
 
 .RightArrow {
   color: #879596;
-}
-
-@media (min-width: 500px) {
-  .NavItem a {
-    /* padding: 13px 20px 13px 36px; */
-  }
 }

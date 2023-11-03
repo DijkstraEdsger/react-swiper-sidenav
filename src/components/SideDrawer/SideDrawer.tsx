@@ -54,16 +54,10 @@ const SideDrawer = ({
   const preProcessedNavItems = state.navItems.map((itemsGroup: any, index) => {
     if (state.positions && state.positions.length > 0) {
       return (
-        <NavItems
-          posX={state.positions[itemsGroup.posXIndex]}
-          key={index}
-          // styles={itemsGroup.styleChildrenContainer}
-          className={itemsGroup.classes?.container}
-        >
+        <NavItems posX={state.positions[itemsGroup.posXIndex]} key={index} className={itemsGroup.classes?.container}>
           {itemsGroup.current ? (
             <BackArrow
               onClick={() => slideBackward(itemsGroup.parent, itemsGroup.current)}
-              // style={itemsGroup.styleBackArrow}
               className={itemsGroup.classes?.back}
             >
               {itemsGroup.parentName}
@@ -75,24 +69,14 @@ const SideDrawer = ({
               <NavItem
                 key={i + index}
                 child={navItem.child}
-                // parent={index}
-                // clicked={(parent, child) => slideForwardHandler(parent, child)}
                 clicked={() => slideForwardHandler(index, navItem.child)}
-                // link={navItem.link}
                 clickedLink={clickedLink}
                 hasRenderItem={!!navItem.renderItem}
                 itemProps={navItem.itemProps}
                 disableClose={navItem.disableClose}
-                // icon={navItem.icon}
-                // style={navItem.style}
-                // className={`${itemsGroup.classes?.button || ""} ${
-                //   navItem.className || ""
-                // }`}
                 className={navItem.className}
                 itemsClassName={itemsGroup.classes?.items}
-                // styleRightArrow={navItem.styleRightArrow}
               >
-                {/* {navItem.name} */}
                 {navItem.renderItem || navItem.name}
               </NavItem>
             )
@@ -123,7 +107,6 @@ const SideDrawer = ({
       className={classesSideDrawer.join(' ')}
       style={{
         zIndex: zIndex ? zIndex : 500,
-        // width: "inherit",
         ...style,
         position: variant === 'permanent' ? 'inherit' : 'fixed',
       }}
