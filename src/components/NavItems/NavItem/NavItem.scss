@@ -1,0 +1,141 @@
+.NavItem {
+  width: 100%;
+}
+
+.LinkItem {
+  text-decoration: none;
+  font-size: 14px;
+  color: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding: 12px 24px 12px 32px;
+  font-size: 16px;
+  color: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 51px;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  outline: none;
+  border: 0;
+  background-color: inherit;
+  width: 100%;
+  cursor: pointer;
+}
+
+.NavItemRightArrow {
+  /* box-sizing: border-box; */
+  width: 100%;
+  background-color: inherit;
+  /* padding-bottom: 2px; */
+  /* cursor: pointer; */
+}
+
+.SliceItem {
+  text-decoration: none;
+  box-sizing: border-box;
+  padding: 12px 24px 12px 32px;
+  font-size: 14px;
+  /* color: #111; */
+  color: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 51px;
+  align-items: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  outline: none;
+  border: 0;
+  background-color: inherit;
+  width: 100%;
+  cursor: pointer;
+}
+
+.SliceItem::after {
+  content: "";
+  border: 8px solid transparent;
+  border-left-color: #000;
+  transform: translateX(8px);
+}
+
+.NavItem svg {
+  color: inherit;
+}
+
+.NavItem i {
+  color: #879596;
+}
+
+.LinkItem.active {
+  background-color: #ccc;
+}
+
+/* .NavItem:hover {
+  background-color: #eaeded;
+} */
+
+.NavItemRightArrow:hover {
+  background-color: #eaeded;
+}
+
+.NavItem:hover svg {
+  color: inherit;
+}
+
+.NavItem:hover i {
+  color: #111;
+}
+
+.Icon {
+  margin-right: 10px;
+  color: inherit;
+}
+
+.TextItem {
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.IconLinkContainer {
+  display: flex;
+  align-items: center;
+}
+
+.IconLinkContainer i {
+  color: inherit;
+}
+
+.IconContainer {
+  color: inherit;
+}
+
+.IconContainer i {
+  color: inherit;
+}
+
+.RightArrow {
+  color: #879596;
+}
+
+@media (min-width: 500px) {
+  .NavItem a {
+    /* padding: 13px 20px 13px 36px; */
+  }
+}

@@ -1,0 +1,23 @@
+.HeadItem {
+  box-sizing: border-box;
+  width: 100%;
+  padding-bottom: 2px;
+  font-weight: 700;
+  color: #111;
+  text-transform: capitalize;
+  font-size: 19px;
+  line-height: 24px;
+  padding: 15px 20px 15px 20px;
+}
+
+.HeadItem div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 500px) {
+  .HeadItem {
+    padding: 13px 20px 13px 36px;
+  }
+}
