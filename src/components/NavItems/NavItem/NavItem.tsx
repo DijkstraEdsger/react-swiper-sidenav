@@ -1,6 +1,6 @@
-import React from "react";
-import "./NavItem.scss";
-import { INavItemProps } from "Interfaces/NavItem";
+import React from 'react'
+import './NavItem.scss'
+import { INavItemProps } from 'Interfaces/NavItem'
 
 const NavItem = ({
   child,
@@ -11,13 +11,10 @@ const NavItem = ({
   itemProps,
   hasRenderItem = false,
   disableClose = false,
-  itemsClassName = "",
+  itemsClassName = '',
 }: INavItemProps) => {
   let item = (
-    <div
-      onClick={disableClose ? undefined : clickedLink}
-      className="IconLinkContainer"
-    >
+    <div onClick={disableClose ? undefined : clickedLink} className='IconLinkContainer'>
       {hasRenderItem ? (
         children
       ) : (
@@ -26,33 +23,25 @@ const NavItem = ({
         </a>
       )}
     </div>
-  );
+  )
 
   if (child !== -1) {
     if (hasRenderItem) {
       item = (
-        <div role="button" onClick={clicked} style={{ cursor: "pointer" }}>
+        <div role='button' onClick={clicked} style={{ cursor: 'pointer' }}>
           {children}
         </div>
-      );
+      )
     } else {
       item = (
-        <button
-          {...itemProps}
-          onClick={clicked}
-          className={`SliceItem ${itemsClassName} ${className}`}
-        >
-          <div className="TextItem">{children}</div>
+        <button {...itemProps} onClick={clicked} className={`SliceItem ${itemsClassName} ${className}`}>
+          <div className='TextItem'>{children}</div>
         </button>
-      );
+      )
     }
   }
 
-  return (
-    <li className={`${child !== -1 ? "NavItemRightArrow" : "NavItem"}`}>
-      {item}
-    </li>
-  );
-};
+  return <li className={`${child !== -1 ? 'NavItemRightArrow' : 'NavItem'}`}>{item}</li>
+}
 
-export default NavItem;
+export default NavItem
