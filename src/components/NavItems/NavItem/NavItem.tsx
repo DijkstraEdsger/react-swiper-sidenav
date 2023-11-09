@@ -1,6 +1,28 @@
 import React from 'react'
 import './NavItem.scss'
-import { INavItemProps } from 'Interfaces/NavItem'
+import { INavItemProps, IIconLinkItemProps, IRenderItemProps, ISliceItemProps } from 'Interfaces/NavItem'
+
+const MenuItem = ({ disableClose, clickedLink, children, itemsClassName, itemProps }: IIconLinkItemProps) => (
+  <a onClick={disableClose ? undefined : clickedLink} className={`MenuItem ${itemsClassName}`} {...(itemProps || {})}>
+    <div>{children}</div>
+  </a>
+)
+
+const RenderItem = ({ clicked, children, disableClose }: IRenderItemProps) => (
+  <div role='button' onClick={disableClose ? undefined : clicked || undefined}>
+    {children}
+  </div>
+)
+
+const SliceMenuItem = ({ clicked, children, itemsClassName, className, itemProps }: ISliceItemProps) => (
+  <button
+    {...(itemProps || {})}
+    onClick={clicked || undefined}
+    className={`MenuItem RightArrow ${itemsClassName} ${className}`}
+  >
+    <div>{children}</div>
+  </button>
+)
 
 const NavItem = ({
   child,
@@ -13,35 +35,34 @@ const NavItem = ({
   disableClose = false,
   itemsClassName = '',
 }: INavItemProps) => {
-  let item = (
-    <div onClick={disableClose ? undefined : clickedLink} className='IconLinkContainer'>
-      {hasRenderItem ? (
-        children
-      ) : (
-        <a className={`LinkItem ${itemsClassName}`} {...itemProps}>
-          {children}
-        </a>
-      )}
-    </div>
+  let item = hasRenderItem ? (
+    <RenderItem clicked={clicked} disableClose={disableClose}>
+      {children}
+    </RenderItem>
+  ) : (
+    <MenuItem
+      disableClose={disableClose}
+      clickedLink={clickedLink}
+      itemsClassName={itemsClassName}
+      itemProps={itemProps}
+    >
+      {children}
+    </MenuItem>
   )
 
   if (child !== -1) {
-    if (hasRenderItem) {
-      item = (
-        <div role='button' onClick={clicked}>
-          {children}
-        </div>
-      )
-    } else {
-      item = (
-        <button {...itemProps} onClick={clicked} className={`SliceItem ${itemsClassName} ${className}`}>
-          <div className='TextItem'>{children}</div>
-        </button>
-      )
-    }
+    item = hasRenderItem ? (
+      <RenderItem clicked={clicked} disableClose={disableClose}>
+        {children}
+      </RenderItem>
+    ) : (
+      <SliceMenuItem clicked={clicked} itemsClassName={itemsClassName} className={className} itemProps={itemProps}>
+        {children}
+      </SliceMenuItem>
+    )
   }
 
-  return <li className={`${child !== -1 ? 'NavItemRightArrow' : 'NavItem'}`}>{item}</li>
+  return <li className='NavItem'>{item}</li>
 }
 
 export default NavItem

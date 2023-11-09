@@ -51,68 +51,73 @@ const SideDrawer = ({
     }))
   }
 
-  const preProcessedNavItems = state.navItems.map((itemsGroup: any, index) => {
-    if (state.positions && state.positions.length > 0) {
-      return (
-        <NavItems posX={state.positions[itemsGroup.posXIndex]} key={index} className={itemsGroup.classes?.container}>
-          {itemsGroup.current ? (
-            <BackArrow
-              onClick={() => slideBackward(itemsGroup.parent, itemsGroup.current)}
-              className={itemsGroup.classes?.back}
-            >
-              {itemsGroup.parentName}
-            </BackArrow>
-          ) : null}
-          {index !== 0 ? <HeadItem className={itemsGroup.classes?.head}>{itemsGroup.headName}</HeadItem> : null}
-          {itemsGroup.navItemsChildren.map((navItem: any, i: number) => {
-            return (
-              <NavItem
-                key={i + index}
-                child={navItem.child}
-                clicked={() => slideForwardHandler(index, navItem.child)}
-                clickedLink={clickedLink}
-                hasRenderItem={!!navItem.renderItem}
-                itemProps={navItem.itemProps}
-                disableClose={navItem.disableClose}
-                className={navItem.className}
-                itemsClassName={itemsGroup.classes?.items}
+  const getPreProcessedNavItems = () =>
+    state.navItems.map((itemsGroup: any, index) => {
+      if (state.positions && state.positions.length > 0) {
+        return (
+          <NavItems posX={state.positions[itemsGroup.posXIndex]} key={index} className={itemsGroup.classes?.container}>
+            {itemsGroup.current ? (
+              <BackArrow
+                onClick={() => slideBackward(itemsGroup.parent, itemsGroup.current)}
+                className={itemsGroup.classes?.back}
               >
-                {navItem.renderItem || navItem.name}
-              </NavItem>
-            )
-          })}
-        </NavItems>
-      )
-    }
+                {itemsGroup.parentName}
+              </BackArrow>
+            ) : null}
+            {index !== 0 ? <HeadItem className={itemsGroup.classes?.head}>{itemsGroup.headName}</HeadItem> : null}
+            {itemsGroup.navItemsChildren.map((navItem: any, i: number) => {
+              return (
+                <NavItem
+                  key={i + index}
+                  child={navItem.child}
+                  clicked={() => slideForwardHandler(index, navItem.child)}
+                  clickedLink={clickedLink}
+                  hasRenderItem={!!navItem.renderItem}
+                  itemProps={navItem.itemProps}
+                  disableClose={navItem.disableClose}
+                  className={navItem.className}
+                  itemsClassName={itemsGroup.classes?.items}
+                >
+                  {navItem.renderItem || navItem.name}
+                </NavItem>
+              )
+            })}
+          </NavItems>
+        )
+      }
 
-    return null
-  })
+      return null
+    })
 
-  let classesSideDrawer = ['SideDrawer', 'SideDrawerLeft', 'CloseLeft']
-
-  if (placement === 'right') {
-    classesSideDrawer = ['SideDrawer', 'SideDrawerRight', 'CloseRight']
-  }
-
-  if (open) {
-    classesSideDrawer = ['SideDrawer', 'SideDrawerLeft', 'Open']
+  const getClassesSideDrawer = () => {
+    let classesSideDrawer = ['SideDrawer', 'SideDrawerLeft', 'CloseLeft']
 
     if (placement === 'right') {
-      classesSideDrawer = ['SideDrawer', 'SideDrawerRight', 'Open']
+      classesSideDrawer = ['SideDrawer', 'SideDrawerRight', 'CloseRight']
     }
+
+    if (open) {
+      classesSideDrawer = ['SideDrawer', 'SideDrawerLeft', 'Open']
+
+      if (placement === 'right') {
+        classesSideDrawer = ['SideDrawer', 'SideDrawerRight', 'Open']
+      }
+    }
+
+    return classesSideDrawer
   }
 
   return (
     <div
-      className={classesSideDrawer.join(' ')}
+      className={getClassesSideDrawer().join(' ')}
       style={{
-        zIndex: zIndex ? zIndex : 500,
+        zIndex: zIndex || 500,
         ...style,
         position: variant === 'permanent' ? 'inherit' : 'fixed',
       }}
     >
       {menuHead ? menuHead : null}
-      {preProcessedNavItems}
+      {getPreProcessedNavItems()}
     </div>
   )
 }

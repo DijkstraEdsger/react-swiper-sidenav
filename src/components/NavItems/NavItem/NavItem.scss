@@ -1,8 +1,9 @@
 .NavItem {
   width: 100%;
+  background-color: inherit;
 }
 
-.LinkItem {
+.MenuItem {
   text-decoration: none;
   font-size: 14px;
   color: inherit;
@@ -10,63 +11,22 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-decoration: none;
   box-sizing: border-box;
   padding: 12px 24px 12px 32px;
-  font-size: 16px;
-  color: inherit;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 51px;
-  align-items: center;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  min-height: 51px;
   outline: none;
   border: 0;
   background-color: inherit;
   width: 100%;
+  text-align: left;
   cursor: pointer;
-}
 
-.NavItemRightArrow {
-  width: 100%;
-  background-color: inherit;
-}
-
-.SliceItem {
-  text-decoration: none;
-  box-sizing: border-box;
-  padding: 12px 24px 12px 32px;
-  font-size: 14px;
-  color: inherit;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 51px;
-  align-items: center;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  outline: none;
-  border: 0;
-  background-color: inherit;
-  width: 100%;
-  cursor: pointer;
-}
-
-.SliceItem::after {
-  content: '';
-  border: 8px solid transparent;
-  border-left-color: #000;
-  transform: translateX(8px);
+  &.RightArrow::after {
+    content: '';
+    border: 8px solid transparent;
+    border-left-color: #000;
+    transform: translateX(8px);
+  }
 }
 
 .NavItem svg {
@@ -77,12 +37,8 @@
   color: #879596;
 }
 
-.LinkItem.active {
+.MenuItem.active {
   background-color: #ccc;
-}
-
-.NavItemRightArrow:hover {
-  background-color: #eaeded;
 }
 
 .NavItem:hover svg {
@@ -91,37 +47,4 @@
 
 .NavItem:hover i {
   color: #111;
-}
-
-.Icon {
-  margin-right: 10px;
-  color: inherit;
-}
-
-.TextItem {
-  max-width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.IconLinkContainer {
-  display: flex;
-  align-items: center;
-}
-
-.IconLinkContainer i {
-  color: inherit;
-}
-
-.IconContainer {
-  color: inherit;
-}
-
-.IconContainer i {
-  color: inherit;
-}
-
-.RightArrow {
-  color: #879596;
 }
