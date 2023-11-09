@@ -16,6 +16,7 @@ const SideDrawer = ({
   menuHead,
   variant = 'temporary',
   style = {},
+  navProps,
 }: ISideDrawerProps) => {
   const [state, setState] = useState({
     positions: new Array<string>(),
@@ -108,8 +109,9 @@ const SideDrawer = ({
   }
 
   return (
-    <div
+    <nav
       className={getClassesSideDrawer().join(' ')}
+      {...(navProps || {})}
       style={{
         zIndex: zIndex || 500,
         ...style,
@@ -118,7 +120,7 @@ const SideDrawer = ({
     >
       {menuHead ? menuHead : null}
       {getPreProcessedNavItems()}
-    </div>
+    </nav>
   )
 }
 

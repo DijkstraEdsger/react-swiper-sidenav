@@ -10,4 +10,5 @@ export interface ISideNavProps {
   hideBackdrop: boolean
   variant: Variant
   style: React.CSSProperties
+  navProps: React.JSX.ElementAttributesProperty
 }

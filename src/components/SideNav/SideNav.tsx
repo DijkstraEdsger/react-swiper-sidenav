@@ -20,6 +20,7 @@ const SideNav = ({
   hideBackdrop = false,
   variant = 'temporary',
   style = {},
+  navProps,
 }: ISideNavProps) => {
   const positionsRef = React.useRef<string[]>([])
 
@@ -96,6 +97,7 @@ const SideNav = ({
         zIndex={zIndex}
         variant={variant}
         style={style}
+        navProps={navProps}
       />
     </div>
   )
