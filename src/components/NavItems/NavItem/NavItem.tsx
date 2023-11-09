@@ -3,19 +3,23 @@ import './NavItem.scss'
 import { INavItemProps, IIconLinkItemProps, IRenderItemProps, ISliceItemProps } from 'Interfaces/NavItem'
 
 const MenuItem = ({ disableClose, clickedLink, children, itemsClassName, itemProps }: IIconLinkItemProps) => (
-  <a onClick={disableClose ? undefined : clickedLink} className={`MenuItem ${itemsClassName}`} {...itemProps}>
+  <a onClick={disableClose ? undefined : clickedLink} className={`MenuItem ${itemsClassName}`} {...(itemProps || {})}>
     <div>{children}</div>
   </a>
 )
 
 const RenderItem = ({ clicked, children, disableClose }: IRenderItemProps) => (
-  <div role='button' onClick={disableClose ? undefined : clicked}>
+  <div role='button' onClick={disableClose ? undefined : clicked || undefined}>
     {children}
   </div>
 )
 
 const SliceMenuItem = ({ clicked, children, itemsClassName, className, itemProps }: ISliceItemProps) => (
-  <button {...itemProps} onClick={clicked} className={`MenuItem RightArrow ${itemsClassName} ${className}`}>
+  <button
+    {...(itemProps || {})}
+    onClick={clicked || undefined}
+    className={`MenuItem RightArrow ${itemsClassName} ${className}`}
+  >
     <div>{children}</div>
   </button>
 )
