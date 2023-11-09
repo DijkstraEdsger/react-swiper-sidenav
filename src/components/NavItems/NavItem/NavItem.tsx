@@ -22,6 +22,7 @@ const RenderItem = ({ clicked, children, disableClose }: IRenderItemProps) => (
 const SliceMenuItem = ({ clicked, children, itemsClassName, className, itemProps }: ISliceItemProps) => (
   <div
     role='menuitem'
+    aria-haspopup='true'
     {...(itemProps || {})}
     onClick={clicked || undefined}
     className={`MenuItem RightArrow ${itemsClassName} ${className}`}
