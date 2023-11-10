@@ -7,33 +7,29 @@ export const menuObjectTreeToArray = (
   parentName: string,
 ) => {
   if (navItem.childrenItems) {
-    const navItemsChildren: any[] = []
     tree.push(currentNavItemsIndex)
 
-    navItem.childrenItems.forEach((navItemChild: any) => {
-      let child = -1
-      if (navItemChild.childrenItems) {
-        child = tree.length
-      }
-      navItemsChildren.push({
-        child: child,
+    const navItemsChildren = navItem.childrenItems.map((navItemChild: any) => {
+      const child = navItemChild.childrenItems ? tree.length : -1
+      menuObjectTreeToArray(navItemChild, tree.length, tree, currentNavItemsIndex, navItem.name)
+      return {
+        child,
         parent: currentNavItemsIndex,
         name: navItemChild.name,
         renderItem: navItemChild.renderItem,
         disableClose: navItemChild.disableClose,
         className: navItemChild.className || '',
         itemProps: navItemChild.itemProps,
-      })
-      menuObjectTreeToArray(navItemChild, tree.length, tree, currentNavItemsIndex, navItem.name)
+      }
     })
 
     tree[currentNavItemsIndex] = {
-      parent: parent,
+      parent,
       current: currentNavItemsIndex,
-      parentName: parentName,
+      parentName,
       headName: navItem.name,
       posXIndex: currentNavItemsIndex,
-      navItemsChildren: navItemsChildren,
+      navItemsChildren,
       classes: navItem.classes,
     }
   }
