@@ -50,18 +50,18 @@ const SideDrawer = ({
 
   const getPreProcessedNavItems = () =>
     navItems?.map((itemsGroup: any, index) => {
-      if (state.positions && state.positions.length > 0) {
+      if (state.positions?.length > 0) {
         return (
           <NavItems posX={state.positions[itemsGroup.posXIndex]} key={index} className={itemsGroup.classes?.container}>
-            {itemsGroup.current ? (
+            {itemsGroup.current !== 0 && (
               <BackArrow
                 onClick={() => slideBackward(itemsGroup.parent, itemsGroup.current)}
                 className={itemsGroup.classes?.back}
               >
                 {itemsGroup.parentName}
               </BackArrow>
-            ) : null}
-            {index !== 0 ? <HeadItem className={itemsGroup.classes?.head}>{itemsGroup.headName}</HeadItem> : null}
+            )}
+            {index !== 0 && <HeadItem className={itemsGroup.classes?.head}>{itemsGroup.headName}</HeadItem>}
             {itemsGroup.navItemsChildren.map((navItem: any, i: number) => {
               return (
                 <NavItem
