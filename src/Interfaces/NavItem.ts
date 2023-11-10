@@ -2,7 +2,7 @@ export interface INavItemProps {
   clicked: () => void
   children?: React.JSX.Element | string
   className: string
-  itemProps?: React.JSX.ElementAttributesProperty
+  itemProps?: React.HTMLAttributes<HTMLElement>
   hasRenderItem: boolean
   disableClose: boolean
   itemsClassName?: string
@@ -14,14 +14,14 @@ export interface IMenuLinkItemProps {
   clicked: () => void
   children?: React.JSX.Element | string
   itemsClassName: string
-  itemProps?: React.JSX.ElementAttributesProperty
+  itemProps?: React.HTMLAttributes<HTMLElement>
 }
 
 export interface IRenderItemProps {
   disableClose: boolean
   clicked: () => void
   children?: React.JSX.Element | string
-  itemProps?: React.JSX.ElementAttributesProperty
+  itemProps?: React.HTMLAttributes<HTMLElement>
 }
 
 export interface ISliceItemProps {
@@ -29,5 +29,5 @@ export interface ISliceItemProps {
   children?: React.JSX.Element | string
   itemsClassName: string
   className: string
-  itemProps?: React.JSX.ElementAttributesProperty
+  itemProps?: React.HTMLAttributes<HTMLElement>
 }

@@ -7,17 +7,52 @@ type NavItemsProps = {
   isDrawerOpen: boolean
   clickedLink: () => void
   forward: (child: number) => void
+  backward: () => void
 }
 
 type NavItemsReturn = {
   navClassName: string
   tabIndex: number
   getNavItemProps: (navItem: any) => any
+  onKeyDownForward: (e: React.KeyboardEvent<HTMLLIElement>, child: number) => void
+  onKeyDownBack: (e: React.KeyboardEvent<HTMLElement>) => void
+  onKeyDownLink: (e: React.KeyboardEvent<HTMLLIElement>) => void
 }
 
-const useNavItems = ({ clickedLink, forward, className, posX, isDrawerOpen }: NavItemsProps): NavItemsReturn => {
+const useNavItems = ({
+  clickedLink,
+  forward,
+  backward,
+  className,
+  posX,
+  isDrawerOpen,
+}: NavItemsProps): NavItemsReturn => {
   const navClassName = useMemo(() => `NavItems ${className}`, [className])
   const tabIndex = useMemo(() => (isDrawerOpen && posX === '0' ? 0 : -1), [isDrawerOpen, posX])
+
+  const onKeyDownForward = (e: React.KeyboardEvent<HTMLLIElement>, child: number) => {
+    const { key } = e
+
+    if (key === 'Enter' || key === 'ArrowRight') {
+      forward(child)
+    }
+  }
+
+  const onKeyDownLink = (e: React.KeyboardEvent<HTMLLIElement>) => {
+    const { key } = e
+
+    if (key === 'Enter') {
+      clickedLink()
+    }
+  }
+
+  const onKeyDownBack = (e: React.KeyboardEvent<HTMLElement>) => {
+    const { key } = e
+
+    if (key === 'Enter' || key === 'ArrowLeft') {
+      backward()
+    }
+  }
 
   const getNavItemProps = (navItem: any): INavItemProps => {
     return {
@@ -29,7 +64,7 @@ const useNavItems = ({ clickedLink, forward, className, posX, isDrawerOpen }: Na
     }
   }
 
-  return { navClassName, tabIndex, getNavItemProps }
+  return { navClassName, tabIndex, getNavItemProps, onKeyDownForward, onKeyDownBack, onKeyDownLink }
 }
 
 export default useNavItems

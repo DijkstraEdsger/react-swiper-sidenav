@@ -3,4 +3,5 @@ export interface IBackArrowProps {
   className: string
   children: React.JSX.Element
   tabIndex: number
+  onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void
 }
