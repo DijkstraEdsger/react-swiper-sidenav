@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './SideDrawer.scss'
 import NavItems from 'components/NavItems/NavItems'
-import NavItem from 'components/NavItems/NavItem/NavItem'
-import BackArrow from 'components/BackArrow/BackArrow'
-import HeadItem from './HeadItem/HeadItem'
 import { ISideDrawerProps } from 'Interfaces/SideDrawer'
 
 const SideDrawer = ({
@@ -52,34 +49,16 @@ const SideDrawer = ({
     navItems?.map((itemsGroup: any, index) => {
       if (state.positions?.length > 0) {
         return (
-          <NavItems posX={state.positions[itemsGroup.posXIndex]} key={index} className={itemsGroup.classes?.container}>
-            {itemsGroup.current !== 0 && (
-              <BackArrow
-                onClick={() => slideBackward(itemsGroup.parent, itemsGroup.current)}
-                className={itemsGroup.classes?.back}
-              >
-                {itemsGroup.parentName}
-              </BackArrow>
-            )}
-            {index !== 0 && <HeadItem className={itemsGroup.classes?.head}>{itemsGroup.headName}</HeadItem>}
-            {itemsGroup.navItemsChildren.map((navItem: any, i: number) => {
-              return (
-                <NavItem
-                  key={i + index}
-                  child={navItem.child}
-                  clicked={() => slideForwardHandler(index, navItem.child)}
-                  clickedLink={clickedLink}
-                  hasRenderItem={!!navItem.renderItem}
-                  itemProps={navItem.itemProps}
-                  disableClose={navItem.disableClose}
-                  className={navItem.className}
-                  itemsClassName={itemsGroup.classes?.items}
-                >
-                  {navItem.renderItem || navItem.name}
-                </NavItem>
-              )
-            })}
-          </NavItems>
+          <NavItems
+            posX={state.positions[itemsGroup.posXIndex]}
+            key={index}
+            className={itemsGroup.classes?.container}
+            items={itemsGroup}
+            forward={(child) => slideForwardHandler(index, child)}
+            backward={() => slideBackward(itemsGroup?.parent, itemsGroup?.current)}
+            index={index}
+            clickedLink={clickedLink}
+          />
         )
       }
 
