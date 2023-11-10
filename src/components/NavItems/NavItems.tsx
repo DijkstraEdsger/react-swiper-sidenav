@@ -19,8 +19,8 @@ const NavItems: React.FC<INavItemsProps> = ({ className = '', posX, items, forwa
           <NavItem
             key={i + index}
             child={navItem.child}
-            clicked={() => forward(navItem.child)}
-            clickedLink={clickedLink}
+            clicked={navItem.child === -1 ? clickedLink : () => forward(navItem.child)}
+            // clickedLink={clickedLink}
             hasRenderItem={!!navItem.renderItem}
             itemProps={navItem.itemProps}
             disableClose={navItem.disableClose}

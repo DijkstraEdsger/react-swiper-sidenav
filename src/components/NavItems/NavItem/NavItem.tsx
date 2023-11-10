@@ -1,10 +1,10 @@
 import React from 'react'
 import './NavItem.scss'
-import { INavItemProps, IIconLinkItemProps, IRenderItemProps, ISliceItemProps } from 'Interfaces/NavItem'
+import { INavItemProps, IMenuLinkItemProps, IRenderItemProps, ISliceItemProps } from 'Interfaces/NavItem'
 
-const MenuItem = ({ disableClose, clickedLink, children, itemsClassName, itemProps }: IIconLinkItemProps) => (
+const MenuItem = ({ disableClose, clicked, children, itemsClassName, itemProps }: IMenuLinkItemProps) => (
   <a
-    onClick={disableClose ? undefined : clickedLink}
+    onClick={disableClose ? undefined : clicked}
     className={`MenuItem ${itemsClassName}`}
     {...(itemProps || {})}
     role='menuitem'
@@ -34,7 +34,7 @@ const SliceMenuItem = ({ clicked, children, itemsClassName, className, itemProps
 const NavItem = ({
   child,
   clicked,
-  clickedLink,
+  // clickedLink,
   children,
   className,
   itemProps,
@@ -47,12 +47,7 @@ const NavItem = ({
       {children}
     </RenderItem>
   ) : (
-    <MenuItem
-      disableClose={disableClose}
-      clickedLink={clickedLink}
-      itemsClassName={itemsClassName}
-      itemProps={itemProps}
-    >
+    <MenuItem disableClose={disableClose} clicked={clicked} itemsClassName={itemsClassName} itemProps={itemProps}>
       {children}
     </MenuItem>
   )

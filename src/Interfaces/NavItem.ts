@@ -1,7 +1,7 @@
 export interface INavItemProps {
   child: number
   clicked: () => void
-  clickedLink: () => void
+  // clickedLink: () => void
   children: React.JSX.Element | string
   className: string
   itemProps: React.JSX.ElementAttributesProperty
@@ -10,9 +10,9 @@ export interface INavItemProps {
   itemsClassName: string
 }
 
-export interface IIconLinkItemProps {
+export interface IMenuLinkItemProps {
   disableClose: boolean
-  clickedLink: () => void
+  clicked: () => void
   children: React.JSX.Element | string
   itemsClassName: string
   itemProps: React.JSX.ElementAttributesProperty
