@@ -32,15 +32,14 @@ const SliceMenuItem = ({ clicked, children, itemsClassName, className, itemProps
 )
 
 const NavItem = ({
-  child,
   clicked,
-  // clickedLink,
   children,
   className,
   itemProps,
   hasRenderItem = false,
   disableClose = false,
   itemsClassName = '',
+  hasSubMenu = false,
 }: INavItemProps) => {
   let item = hasRenderItem ? (
     <RenderItem clicked={clicked} disableClose={disableClose}>
@@ -52,7 +51,7 @@ const NavItem = ({
     </MenuItem>
   )
 
-  if (child !== -1) {
+  if (hasSubMenu) {
     item = hasRenderItem ? (
       <RenderItem clicked={clicked} disableClose={disableClose}>
         {children}
