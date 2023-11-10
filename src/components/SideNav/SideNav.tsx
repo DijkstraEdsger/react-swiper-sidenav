@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import Backdrop from '../Backdrop/Backdrop'
 import { ISideNavProps } from 'Interfaces/SideNav'
-import { menuObjectTreeToArray } from 'utils/functions'
 import './SideNav.scss'
-
-type PreProcessedNavItems = {
-  preProcessedNavItems: any[]
-}
+import useSideNav from './useSideNav'
 
 const SideNav = ({
   navItems,
@@ -21,32 +17,19 @@ const SideNav = ({
   style = {},
   navProps,
 }: ISideNavProps) => {
-  const [state, setState] = useState<PreProcessedNavItems>({
-    preProcessedNavItems: [],
+  const { preProcessedNavItems, className, showBackdrop, openSideDrawer } = useSideNav({
+    navItems,
+    variant,
+    hideBackdrop,
+    open,
   })
 
-  useEffect(() => {
-    if (navItems) {
-      const preProcessedNavItems: any[] = []
-      preProcessNavItems(preProcessedNavItems)
-
-      setState({
-        preProcessedNavItems: [...preProcessedNavItems],
-      })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [navItems])
-
-  const preProcessNavItems = (tree: any) => {
-    menuObjectTreeToArray(navItems, 0, tree, -1, '')
-  }
-
   return (
-    <div className={variant === 'permanent' ? 'permanentDisplay' : 'fixedDisplay'}>
-      {!hideBackdrop && variant !== 'permanent' && <Backdrop clicked={onClose} show={open} zIndex={zIndex} />}
+    <div className={className}>
+      {showBackdrop && <Backdrop clicked={onClose} show={open} zIndex={zIndex} />}
       <SideDrawer
-        open={open || variant === 'permanent'}
-        navItems={state.preProcessedNavItems as never[]}
+        open={openSideDrawer}
+        navItems={preProcessedNavItems as never[]}
         clickedLink={variant === 'temporary' ? onClose : undefined}
         menuHead={children}
         placement={placement}
