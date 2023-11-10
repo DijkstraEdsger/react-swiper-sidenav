@@ -13,8 +13,8 @@ const MenuItem = ({ disableClose, clicked, children, itemsClassName, itemProps }
   </a>
 )
 
-const RenderItem = ({ clicked, children, disableClose }: IRenderItemProps) => (
-  <div role='menuitem' onClick={disableClose ? undefined : clicked || undefined}>
+const RenderItem = ({ clicked, children, disableClose, itemProps }: IRenderItemProps) => (
+  <div role='menuitem' {...(itemProps || {})} onClick={disableClose ? undefined : clicked || undefined}>
     {children}
   </div>
 )
@@ -42,7 +42,7 @@ const NavItem = ({
   hasSubMenu = false,
 }: INavItemProps) => {
   let item = hasRenderItem ? (
-    <RenderItem clicked={clicked} disableClose={disableClose}>
+    <RenderItem clicked={clicked} disableClose={disableClose} itemProps={itemProps}>
       {children}
     </RenderItem>
   ) : (
@@ -53,7 +53,7 @@ const NavItem = ({
 
   if (hasSubMenu) {
     item = hasRenderItem ? (
-      <RenderItem clicked={clicked} disableClose={disableClose}>
+      <RenderItem clicked={clicked} disableClose={disableClose} itemProps={itemProps}>
         {children}
       </RenderItem>
     ) : (

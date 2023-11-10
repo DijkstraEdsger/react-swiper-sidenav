@@ -6,4 +6,5 @@ export interface INavItemsProps {
   backward: () => void
   index: number
   clickedLink: () => void
+  isDrawerOpen: boolean
 }

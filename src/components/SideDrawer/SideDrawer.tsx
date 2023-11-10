@@ -35,6 +35,7 @@ const SideDrawer = ({
             backward={() => slideBackward(itemsGroup?.parent, itemsGroup?.current)}
             index={index}
             clickedLink={clickedLink}
+            isDrawerOpen={open}
           />
         )
       }
