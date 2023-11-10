@@ -27,6 +27,10 @@
     border-left-color: #000;
     transform: translateX(8px);
   }
+
+  &:focus {
+    background-color: #ccc;
+  }
 }
 
 .NavItem svg {

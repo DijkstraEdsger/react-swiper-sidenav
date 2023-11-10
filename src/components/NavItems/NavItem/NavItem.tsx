@@ -1,10 +1,10 @@
 import React from 'react'
 import './NavItem.scss'
-import { INavItemProps, IIconLinkItemProps, IRenderItemProps, ISliceItemProps } from 'Interfaces/NavItem'
+import { INavItemProps, IMenuLinkItemProps, IRenderItemProps, ISliceItemProps } from 'Interfaces/NavItem'
 
-const MenuItem = ({ disableClose, clickedLink, children, itemsClassName, itemProps }: IIconLinkItemProps) => (
+const MenuItem = ({ disableClose, clicked, children, itemsClassName, itemProps }: IMenuLinkItemProps) => (
   <a
-    onClick={disableClose ? undefined : clickedLink}
+    onClick={disableClose ? undefined : clicked}
     className={`MenuItem ${itemsClassName}`}
     {...(itemProps || {})}
     role='menuitem'
@@ -13,8 +13,8 @@ const MenuItem = ({ disableClose, clickedLink, children, itemsClassName, itemPro
   </a>
 )
 
-const RenderItem = ({ clicked, children, disableClose }: IRenderItemProps) => (
-  <div role='menuitem' onClick={disableClose ? undefined : clicked || undefined}>
+const RenderItem = ({ clicked, children, disableClose, itemProps }: IRenderItemProps) => (
+  <div role='menuitem' {...(itemProps || {})} onClick={disableClose ? undefined : clicked || undefined}>
     {children}
   </div>
 )
@@ -32,34 +32,28 @@ const SliceMenuItem = ({ clicked, children, itemsClassName, className, itemProps
 )
 
 const NavItem = ({
-  child,
   clicked,
-  clickedLink,
   children,
   className,
   itemProps,
   hasRenderItem = false,
   disableClose = false,
   itemsClassName = '',
+  hasSubMenu = false,
 }: INavItemProps) => {
   let item = hasRenderItem ? (
-    <RenderItem clicked={clicked} disableClose={disableClose}>
+    <RenderItem clicked={clicked} disableClose={disableClose} itemProps={itemProps}>
       {children}
     </RenderItem>
   ) : (
-    <MenuItem
-      disableClose={disableClose}
-      clickedLink={clickedLink}
-      itemsClassName={itemsClassName}
-      itemProps={itemProps}
-    >
+    <MenuItem disableClose={disableClose} clicked={clicked} itemsClassName={itemsClassName} itemProps={itemProps}>
       {children}
     </MenuItem>
   )
 
-  if (child !== -1) {
+  if (hasSubMenu) {
     item = hasRenderItem ? (
-      <RenderItem clicked={clicked} disableClose={disableClose}>
+      <RenderItem clicked={clicked} disableClose={disableClose} itemProps={itemProps}>
         {children}
       </RenderItem>
     ) : (

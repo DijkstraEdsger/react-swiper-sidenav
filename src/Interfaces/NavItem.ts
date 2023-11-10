@@ -1,33 +1,33 @@
 export interface INavItemProps {
-  child: number
   clicked: () => void
-  clickedLink: () => void
-  children: React.JSX.Element | string
+  children?: React.JSX.Element | string
   className: string
-  itemProps: React.JSX.ElementAttributesProperty
+  itemProps?: React.HTMLAttributes<HTMLElement>
   hasRenderItem: boolean
   disableClose: boolean
-  itemsClassName: string
+  itemsClassName?: string
+  hasSubMenu: boolean
 }
 
-export interface IIconLinkItemProps {
+export interface IMenuLinkItemProps {
   disableClose: boolean
-  clickedLink: () => void
-  children: React.JSX.Element | string
+  clicked: () => void
+  children?: React.JSX.Element | string
   itemsClassName: string
-  itemProps: React.JSX.ElementAttributesProperty
+  itemProps?: React.HTMLAttributes<HTMLElement>
 }
 
 export interface IRenderItemProps {
   disableClose: boolean
   clicked: () => void
-  children: React.JSX.Element | string
+  children?: React.JSX.Element | string
+  itemProps?: React.HTMLAttributes<HTMLElement>
 }
 
 export interface ISliceItemProps {
   clicked: () => void
-  children: React.JSX.Element | string
+  children?: React.JSX.Element | string
   itemsClassName: string
   className: string
-  itemProps: React.JSX.ElementAttributesProperty
+  itemProps?: React.HTMLAttributes<HTMLElement>
 }

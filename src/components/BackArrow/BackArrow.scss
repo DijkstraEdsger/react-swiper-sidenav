@@ -1,35 +1,31 @@
 .BackArrow {
   box-sizing: border-box;
   width: 100%;
-  padding-bottom: 2px;
   border-bottom: 5px solid #ccc;
   cursor: pointer;
-  display: inline-block;
-
   text-decoration: none;
-  box-sizing: border-box;
   padding: 12px 24px 12px 32px;
   font-size: 14px;
-  /* color: #111; */
   color: inherit;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   height: 51px;
   align-items: center;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   outline: none;
   border: 0;
   background-color: inherit;
-  width: 100%;
-  cursor: pointer;
+
+  &:focus {
+    background-color: #ccc;
+  }
 }
 
 .BackArrow::before {
-  content: "";
+  content: '';
   border: 8px solid transparent;
   border-right-color: #000;
   margin-right: 10px;
@@ -63,19 +59,6 @@
 
 .BackArrow:hover svg {
   color: inherit;
-}
-
-.LeftArrow {
-  font-size: 16px;
-  margin-right: 10px;
-}
-
-.TextItemBackArrow {
-  max-width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 100%;
 }
 
 @media (min-width: 500px) {

@@ -3,7 +3,6 @@ export type Placement = 'left' | 'right'
 
 export interface ISideDrawerProps {
   navItems: never[]
-  positions: string[]
   open: boolean
   clickedLink: any
   placement: Placement
