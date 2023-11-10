@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './SideDrawer.scss'
 import NavItems from 'components/NavItems/NavItems'
 import { ISideDrawerProps } from 'Interfaces/SideDrawer'
+import useSideDrawer from './useSideDrawer'
 
 const SideDrawer = ({
   navItems,
@@ -14,47 +15,23 @@ const SideDrawer = ({
   style = {},
   navProps,
 }: ISideDrawerProps) => {
-  const [state, setState] = useState({
-    positions: new Array<string>(),
+  const { positions, className, cssPosition, slideForward, slideBackward } = useSideDrawer({
+    navItems,
+    variant,
+    placement,
+    open,
   })
-
-  useEffect(() => {
-    if (navItems) {
-      const initialPositions = navItems.map((_: any, index: number) => (index === 0 ? '0' : '100%'))
-      setState({ positions: initialPositions })
-    }
-  }, [navItems])
-
-  const slideForwardHandler = (parent: number, child: number) => {
-    const m = [...state.positions]
-    m[parent] = '-100%'
-    m[child] = '0'
-    setState((prevState) => ({
-      ...prevState,
-      positions: m,
-    }))
-  }
-
-  const slideBackward = (parent: number, current: number) => {
-    const m = [...state.positions]
-    m[parent] = '0'
-    m[current] = '100%'
-    setState((prevState) => ({
-      ...prevState,
-      positions: m,
-    }))
-  }
 
   const getPreProcessedNavItems = () =>
     navItems?.map((itemsGroup: any, index) => {
-      if (state.positions?.length > 0) {
+      if (positions?.length > 0) {
         return (
           <NavItems
-            posX={state.positions[itemsGroup.posXIndex]}
+            posX={positions[itemsGroup.posXIndex]}
             key={index}
             className={itemsGroup.classes?.container}
             items={itemsGroup}
-            forward={(child) => slideForwardHandler(index, child)}
+            forward={(child) => slideForward(index, child)}
             backward={() => slideBackward(itemsGroup?.parent, itemsGroup?.current)}
             index={index}
             clickedLink={clickedLink}
@@ -65,32 +42,14 @@ const SideDrawer = ({
       return null
     })
 
-  const getClassesSideDrawer = () => {
-    let classesSideDrawer = ['SideDrawer', 'SideDrawerLeft', 'CloseLeft']
-
-    if (placement === 'right') {
-      classesSideDrawer = ['SideDrawer', 'SideDrawerRight', 'CloseRight']
-    }
-
-    if (open) {
-      classesSideDrawer = ['SideDrawer', 'SideDrawerLeft', 'Open']
-
-      if (placement === 'right') {
-        classesSideDrawer = ['SideDrawer', 'SideDrawerRight', 'Open']
-      }
-    }
-
-    return classesSideDrawer
-  }
-
   return (
     <nav
-      className={getClassesSideDrawer().join(' ')}
+      className={className}
       {...(navProps || {})}
       style={{
         zIndex: zIndex || 500,
         ...style,
-        position: variant === 'permanent' ? 'inherit' : 'fixed',
+        position: cssPosition,
       }}
     >
       {menuHead || null}
