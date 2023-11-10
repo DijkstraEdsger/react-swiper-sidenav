@@ -8,7 +8,6 @@ import { ISideDrawerProps } from 'Interfaces/SideDrawer'
 
 const SideDrawer = ({
   navItems,
-  positions,
   open,
   clickedLink,
   placement,
@@ -20,17 +19,14 @@ const SideDrawer = ({
 }: ISideDrawerProps) => {
   const [state, setState] = useState({
     positions: new Array<string>(),
-    navItems: [],
   })
 
   useEffect(() => {
-    if (navItems && positions && positions.length) {
-      setState({
-        navItems: [...navItems],
-        positions: [...positions],
-      })
+    if (navItems) {
+      const initialPositions = navItems.map((_: any, index: number) => (index === 0 ? '0' : '100%'))
+      setState({ positions: initialPositions })
     }
-  }, [navItems, positions])
+  }, [navItems])
 
   const slideForwardHandler = (parent: number, child: number) => {
     const m = [...state.positions]
@@ -53,7 +49,7 @@ const SideDrawer = ({
   }
 
   const getPreProcessedNavItems = () =>
-    state.navItems.map((itemsGroup: any, index) => {
+    navItems?.map((itemsGroup: any, index) => {
       if (state.positions && state.positions.length > 0) {
         return (
           <NavItems posX={state.positions[itemsGroup.posXIndex]} key={index} className={itemsGroup.classes?.container}>
@@ -118,7 +114,7 @@ const SideDrawer = ({
         position: variant === 'permanent' ? 'inherit' : 'fixed',
       }}
     >
-      {menuHead ? menuHead : null}
+      {menuHead || null}
       {getPreProcessedNavItems()}
     </nav>
   )

@@ -5,8 +5,6 @@ import { ISideNavProps } from 'Interfaces/SideNav'
 import './SideNav.scss'
 
 type PreProcessedNavItems = {
-  positions: string[]
-  navItems: any
   preProcessedNavItems: any[]
 }
 
@@ -22,23 +20,16 @@ const SideNav = ({
   style = {},
   navProps,
 }: ISideNavProps) => {
-  const positionsRef = React.useRef<string[]>([])
-
   const [state, setState] = useState<PreProcessedNavItems>({
-    positions: [],
-    navItems: {},
     preProcessedNavItems: [],
   })
 
   useEffect(() => {
     if (navItems) {
-      positionsRef.current = new Array<string>()
       const preProcessedNavItems: any[] = []
       preProcessNavItems(preProcessedNavItems)
 
       setState({
-        navItems: navItems,
-        positions: positionsRef.current,
         preProcessedNavItems: [...preProcessedNavItems],
       })
     }
@@ -53,7 +44,6 @@ const SideNav = ({
     if (navItem.childrenItems) {
       const navItemsChildren: any[] = []
       tree.push(currentNavItemsIndex)
-      positionsRef.current.push(currentNavItemsIndex === 0 ? '0' : '100%')
 
       navItem.childrenItems.forEach((navItemChild: any) => {
         let child = -1
@@ -90,7 +80,6 @@ const SideNav = ({
       <SideDrawer
         open={open || variant === 'permanent'}
         navItems={state.preProcessedNavItems as never[]}
-        positions={state.positions}
         clickedLink={variant === 'temporary' ? onClose : undefined}
         menuHead={children}
         placement={placement}
