@@ -7,7 +7,7 @@ export interface ISideDrawerProps {
   clickedLink: any
   placement: Placement
   zIndex: any
-  menuHead: React.JSX.Element
+  menuHead: React.ReactNode
   variant: Variant
   style: React.CSSProperties
   navProps: React.JSX.ElementAttributesProperty
