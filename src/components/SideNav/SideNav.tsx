@@ -1,17 +1,50 @@
 import React from 'react'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import Backdrop from '../Backdrop/Backdrop'
-import { ISideNavProps } from 'Interfaces/SideNav'
 import './SideNav.scss'
 import useSideNav from './useSideNav'
 
-const SideNav = ({
+export type Classes = {
+  container?: string
+  back?: string
+  head?: string
+  items?: string
+}
+
+export type NavItems = {
+  name?: string
+  childrenItems?: NavItems[]
+  itemProps?: React.AllHTMLAttributes<HTMLAnchorElement | HTMLButtonElement | HTMLLIElement>
+  renderItem?: React.ReactNode
+  disableClose?: boolean
+  className?: string
+  classes?: Classes
+}
+
+export type Variant = 'temporary' | 'persistent' | 'permanent'
+export type Placement = 'left' | 'right'
+
+export interface ISideNavProps {
+  navItems: NavItems
+  onClose: () => void
+  open?: boolean
+  zIndex?: number
+  children?: React.ReactNode
+  placement?: Placement
+  hideBackdrop?: boolean
+  variant?: Variant
+  style?: React.CSSProperties
+  navProps?: React.HTMLAttributes<HTMLElement>
+  spreadCssClasses?: boolean
+}
+
+const SideNav: React.FC<ISideNavProps> = ({
   navItems,
   onClose,
-  open,
-  zIndex,
+  open = false,
+  zIndex = 500,
   children,
-  placement,
+  placement = 'left',
   hideBackdrop = false,
   variant = 'temporary',
   style = {},

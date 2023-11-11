@@ -1,1 +1,1 @@
-export { default } from './SideNav'
+export { default, ISideNavProps, NavItems, Variant, Placement } from './SideNav'

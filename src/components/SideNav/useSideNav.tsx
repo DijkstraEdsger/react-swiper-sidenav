@@ -1,9 +1,10 @@
 import { Variant } from 'Interfaces/SideDrawer'
 import { useMemo } from 'react'
 import { preProcessNavItems } from 'utils/functions'
+import { NavItems } from './SideNav'
 
 type SideNavProps = {
-  navItems: any[]
+  navItems: NavItems
   variant: Variant
   hideBackdrop: boolean
   open: boolean

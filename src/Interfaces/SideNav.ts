@@ -5,7 +5,7 @@ export interface ISideNavProps {
   onClose: () => void
   open: boolean
   zIndex: number
-  children: React.JSX.Element
+  children: React.ReactNode
   placement: Placement
   hideBackdrop: boolean
   variant: Variant
