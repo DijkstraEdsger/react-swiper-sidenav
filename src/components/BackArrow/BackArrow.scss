@@ -27,7 +27,7 @@
 .BackArrow::before {
   content: '';
   border: 8px solid transparent;
-  border-right-color: #000;
+  border-right-color: inherit;
   margin-right: 10px;
   transform: translateX(-8px);
 }

@@ -35,3 +35,26 @@ export const convertMenuTreeToArray = (navItems: any) => {
 
   return [...treeArray]
 }
+
+// Helper function to let the submenus to have the same classes as the parent
+export const spreadCssClasses = (navItems: any[]) => {
+  const updatedNavItems = [...navItems]
+
+  updatedNavItems.forEach((navItem: any) => {
+    if (navItem.parent !== -1) {
+      navItem.classes = { ...navItems[navItem.parent].classes, ...navItem.classes }
+    }
+  })
+
+  return updatedNavItems
+}
+
+export const preProcessNavItems = (navItems: any[], isSpreadClasses: boolean) => {
+  const preProcessedNavItems = convertMenuTreeToArray(navItems)
+
+  if (isSpreadClasses) {
+    return spreadCssClasses(preProcessedNavItems)
+  }
+
+  return preProcessedNavItems
+}

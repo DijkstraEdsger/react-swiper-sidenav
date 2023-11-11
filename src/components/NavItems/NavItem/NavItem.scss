@@ -24,7 +24,7 @@
   &.RightArrow::after {
     content: '';
     border: 8px solid transparent;
-    border-left-color: #000;
+    border-left-color: inherit;
     transform: translateX(8px);
   }
 

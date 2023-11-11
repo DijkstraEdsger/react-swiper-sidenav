@@ -11,4 +11,5 @@ export interface ISideNavProps {
   variant: Variant
   style: React.CSSProperties
   navProps: React.JSX.ElementAttributesProperty
+  spreadCssClasses: boolean
 }
