@@ -16,12 +16,14 @@ const SideNav = ({
   variant = 'temporary',
   style = {},
   navProps,
+  spreadCssClasses = true,
 }: ISideNavProps) => {
   const { preProcessedNavItems, className, showBackdrop, openSideDrawer } = useSideNav({
     navItems,
     variant,
     hideBackdrop,
     open,
+    spreadCssClasses,
   })
 
   return (

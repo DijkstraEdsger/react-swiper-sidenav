@@ -1,12 +1,13 @@
 import { Variant } from 'Interfaces/SideDrawer'
 import { useMemo } from 'react'
-import { convertMenuTreeToArray } from 'utils/functions'
+import { preProcessNavItems } from 'utils/functions'
 
 type SideNavProps = {
   navItems: any[]
   variant: Variant
   hideBackdrop: boolean
   open: boolean
+  spreadCssClasses: boolean
 }
 
 type SideNavReturn = {
@@ -16,8 +17,11 @@ type SideNavReturn = {
   openSideDrawer: boolean
 }
 
-const useSideNav = ({ navItems, variant, hideBackdrop, open }: SideNavProps): SideNavReturn => {
-  const preProcessedNavItems = useMemo(() => (navItems ? convertMenuTreeToArray(navItems) : []), [navItems])
+const useSideNav = ({ navItems, variant, hideBackdrop, open, spreadCssClasses }: SideNavProps): SideNavReturn => {
+  const preProcessedNavItems = useMemo(
+    () => (navItems ? preProcessNavItems(navItems, spreadCssClasses) : []),
+    [navItems, spreadCssClasses],
+  )
   const className = useMemo(() => (variant === 'permanent' ? 'permanentDisplay' : 'fixedDisplay'), [variant])
   const showBackdrop = useMemo(() => !hideBackdrop && variant !== 'permanent', [hideBackdrop, variant])
   const openSideDrawer = useMemo(() => open || variant === 'permanent', [open, variant])
