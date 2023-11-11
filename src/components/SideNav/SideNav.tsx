@@ -1,10 +1,11 @@
 import React from 'react'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import Backdrop from '../Backdrop/Backdrop'
-// import { ISideNavProps } from 'Interfaces/SideNav'
 import './SideNav.scss'
 import useSideNav from './useSideNav'
-import { Placement, Variant } from 'Interfaces/SideDrawer'
+
+export type Variant = 'temporary' | 'persistent' | 'permanent'
+export type Placement = 'left' | 'right'
 
 export interface ISideNavProps {
   navItems: never[]
