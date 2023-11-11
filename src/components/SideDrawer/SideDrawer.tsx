@@ -11,7 +11,7 @@ const SideDrawer = ({
   placement,
   zIndex,
   menuHead,
-  variant = 'temporary',
+  variant,
   style = {},
   navProps,
 }: ISideDrawerProps) => {
@@ -48,7 +48,7 @@ const SideDrawer = ({
       className={className}
       {...(navProps || {})}
       style={{
-        zIndex: zIndex || 500,
+        zIndex,
         ...style,
         position: cssPosition,
       }}

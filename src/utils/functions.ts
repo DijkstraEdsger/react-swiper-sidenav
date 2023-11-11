@@ -1,9 +1,11 @@
+import { NavItems } from 'components/SideNav/SideNav'
+
 // this helper function is a DFS algorithm that converts the menu object tree to an array
-const dfs = (navItem: any, currentNavItemsIndex: number, tree: any, parent: number, parentName: string) => {
+const dfs = (navItem: NavItems, currentNavItemsIndex: number, tree: any, parent: number, parentName?: string) => {
   if (navItem.childrenItems) {
     tree.push(currentNavItemsIndex)
 
-    const navItemsChildren = navItem.childrenItems.map((navItemChild: any) => {
+    const navItemsChildren = navItem.childrenItems.map((navItemChild: NavItems) => {
       const child = navItemChild.childrenItems ? tree.length : -1
       dfs(navItemChild, tree.length, tree, currentNavItemsIndex, navItem.name)
       return {
@@ -11,8 +13,8 @@ const dfs = (navItem: any, currentNavItemsIndex: number, tree: any, parent: numb
         parent: currentNavItemsIndex,
         name: navItemChild.name,
         renderItem: navItemChild.renderItem,
-        disableClose: navItemChild.disableClose,
-        className: navItemChild.className || '',
+        disableClose: navItemChild.disableClose ?? false,
+        className: navItemChild.className ?? '',
         itemProps: navItemChild.itemProps,
       }
     })
@@ -29,7 +31,7 @@ const dfs = (navItem: any, currentNavItemsIndex: number, tree: any, parent: numb
   }
 }
 
-export const convertMenuTreeToArray = (navItems: any) => {
+export const convertMenuTreeToArray = (navItems: NavItems) => {
   const treeArray: any[] = []
   dfs(navItems, 0, treeArray, -1, '')
 
@@ -49,7 +51,7 @@ export const spreadCssClasses = (navItems: any[]) => {
   return updatedNavItems
 }
 
-export const preProcessNavItems = (navItems: any[], isSpreadClasses: boolean) => {
+export const preProcessNavItems = (navItems: NavItems, isSpreadClasses: boolean) => {
   const preProcessedNavItems = convertMenuTreeToArray(navItems)
 
   if (isSpreadClasses) {

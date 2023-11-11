@@ -10,5 +10,5 @@ export interface ISideDrawerProps {
   menuHead: React.ReactNode
   variant: Variant
   style: React.CSSProperties
-  navProps: React.JSX.ElementAttributesProperty
+  navProps?: React.HTMLAttributes<HTMLElement>
 }
