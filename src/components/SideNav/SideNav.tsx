@@ -1,11 +1,26 @@
 import React from 'react'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import Backdrop from '../Backdrop/Backdrop'
-import { ISideNavProps } from 'Interfaces/SideNav'
+// import { ISideNavProps } from 'Interfaces/SideNav'
 import './SideNav.scss'
 import useSideNav from './useSideNav'
+import { Placement, Variant } from 'Interfaces/SideDrawer'
 
-const SideNav = ({
+export interface ISideNavProps {
+  navItems: never[]
+  onClose: () => void
+  open: boolean
+  zIndex: number
+  children: React.JSX.Element
+  placement: Placement
+  hideBackdrop: boolean
+  variant: Variant
+  style: React.CSSProperties
+  navProps: React.JSX.ElementAttributesProperty
+  spreadCssClasses: boolean
+}
+
+const SideNav: React.FC<ISideNavProps> = ({
   navItems,
   onClose,
   open,
