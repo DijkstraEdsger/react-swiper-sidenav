@@ -3,6 +3,7 @@ import SideDrawer from '../SideDrawer/SideDrawer'
 import Backdrop from '../Backdrop/Backdrop'
 import './SideNav.scss'
 import useSideNav from './useSideNav'
+import { SideNavProvider } from 'contexts/SideNavContext'
 
 export type Classes = {
   container?: string
@@ -14,7 +15,7 @@ export type Classes = {
 export type NavItems = {
   name?: string
   childrenItems?: NavItems[]
-  itemProps?: React.AllHTMLAttributes<HTMLAnchorElement | HTMLButtonElement | HTMLLIElement>
+  itemProps?: React.AllHTMLAttributes<HTMLAnchorElement | HTMLButtonElement | HTMLLIElement> | any
   renderItem?: React.ReactNode
   disableClose?: boolean
   className?: string
@@ -36,6 +37,7 @@ export interface ISideNavProps {
   style?: React.CSSProperties
   navProps?: React.HTMLAttributes<HTMLElement>
   spreadCssClasses?: boolean
+  renderLink?: (props: any) => React.JSX.Element
 }
 
 const SideNav: React.FC<ISideNavProps> = ({
@@ -50,6 +52,7 @@ const SideNav: React.FC<ISideNavProps> = ({
   style = {},
   navProps,
   spreadCssClasses = true,
+  renderLink,
 }: ISideNavProps) => {
   const { preProcessedNavItems, className, showBackdrop, openSideDrawer } = useSideNav({
     navItems,
@@ -60,20 +63,26 @@ const SideNav: React.FC<ISideNavProps> = ({
   })
 
   return (
-    <div className={className}>
-      {showBackdrop && <Backdrop clicked={onClose} show={open} zIndex={zIndex} />}
-      <SideDrawer
-        open={openSideDrawer}
-        navItems={preProcessedNavItems as never[]}
-        clickedLink={variant === 'temporary' ? onClose : undefined}
-        menuHead={children}
-        placement={placement}
-        zIndex={zIndex}
-        variant={variant}
-        style={style}
-        navProps={navProps}
-      />
-    </div>
+    <SideNavProvider
+      value={{
+        renderLink,
+      }}
+    >
+      <div className={className}>
+        {showBackdrop && <Backdrop clicked={onClose} show={open} zIndex={zIndex} />}
+        <SideDrawer
+          open={openSideDrawer}
+          navItems={preProcessedNavItems as never[]}
+          clickedLink={variant === 'temporary' ? onClose : undefined}
+          menuHead={children}
+          placement={placement}
+          zIndex={zIndex}
+          variant={variant}
+          style={style}
+          navProps={navProps}
+        />
+      </div>
+    </SideNavProvider>
   )
 }
 

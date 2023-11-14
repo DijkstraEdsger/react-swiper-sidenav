@@ -17,14 +17,15 @@ const NavItems: React.FC<INavItemsProps> = ({
   clickedLink,
   isDrawerOpen,
 }) => {
-  const { navClassName, tabIndex, getNavItemProps, onKeyDownLink, onKeyDownForward, onKeyDownBack } = useNavItems({
-    className,
-    posX,
-    isDrawerOpen,
-    clickedLink,
-    forward,
-    backward,
-  })
+  const { navClassName, tabIndex, renderLink, getNavItemProps, onKeyDownLink, onKeyDownForward, onKeyDownBack } =
+    useNavItems({
+      className,
+      posX,
+      isDrawerOpen,
+      clickedLink,
+      forward,
+      backward,
+    })
 
   return (
     <ul className={navClassName} style={{ left: posX }} role='menu'>
@@ -46,7 +47,7 @@ const NavItems: React.FC<INavItemsProps> = ({
         }
 
         return (
-          <NavItem key={i + index} itemsClassName={items?.classes?.items} {...navItemProps}>
+          <NavItem key={i + index} itemsClassName={items?.classes?.items} {...navItemProps} renderLink={renderLink}>
             {navItem.renderItem || navItem.name}
           </NavItem>
         )

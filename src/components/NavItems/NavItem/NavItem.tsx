@@ -40,15 +40,28 @@ const NavItem = ({
   disableClose = false,
   itemsClassName = '',
   hasSubMenu = false,
+  renderLink,
 }: INavItemProps) => {
+  let newLink = null
+
+  if (renderLink) {
+    newLink = React.cloneElement(renderLink(itemProps), {
+      onClick: disableClose ? undefined : clicked,
+      className: `MenuItem ${itemsClassName}`,
+      role: 'menuitem',
+    })
+  }
+
   let item = hasRenderItem ? (
     <RenderItem clicked={clicked} disableClose={disableClose} itemProps={itemProps}>
       {children}
     </RenderItem>
   ) : (
-    <MenuItem disableClose={disableClose} clicked={clicked} itemsClassName={itemsClassName} itemProps={itemProps}>
-      {children}
-    </MenuItem>
+    newLink || (
+      <MenuItem disableClose={disableClose} clicked={clicked} itemsClassName={itemsClassName} itemProps={itemProps}>
+        {children}
+      </MenuItem>
+    )
   )
 
   if (hasSubMenu) {

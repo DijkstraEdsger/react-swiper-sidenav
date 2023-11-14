@@ -1,4 +1,5 @@
 import { INavItemProps } from 'Interfaces/NavItem'
+import { useSideNavContext } from 'contexts/SideNavContext'
 import { useMemo } from 'react'
 
 type NavItemsProps = {
@@ -13,6 +14,7 @@ type NavItemsProps = {
 type NavItemsReturn = {
   navClassName: string
   tabIndex: number
+  renderLink?: (props?: any) => React.JSX.Element
   getNavItemProps: (navItem: any) => any
   onKeyDownForward: (e: React.KeyboardEvent<HTMLLIElement>, child: number) => void
   onKeyDownBack: (e: React.KeyboardEvent<HTMLElement>) => void
@@ -29,6 +31,7 @@ const useNavItems = ({
 }: NavItemsProps): NavItemsReturn => {
   const navClassName = useMemo(() => `NavItems ${className}`, [className])
   const tabIndex = useMemo(() => (isDrawerOpen && posX === '0' ? 0 : -1), [isDrawerOpen, posX])
+  const { renderLink } = useSideNavContext()
 
   const onKeyDownForward = (e: React.KeyboardEvent<HTMLLIElement>, child: number) => {
     const { key } = e
@@ -59,12 +62,13 @@ const useNavItems = ({
       hasSubMenu: navItem.child !== -1,
       clicked: navItem.child === -1 ? clickedLink : () => forward(navItem.child),
       hasRenderItem: !!navItem.renderItem,
+      hasRenderLinkGlobal: !!renderLink,
       disableClose: navItem.disableClose,
       className: navItem.className,
     }
   }
 
-  return { navClassName, tabIndex, getNavItemProps, onKeyDownForward, onKeyDownBack, onKeyDownLink }
+  return { navClassName, tabIndex, renderLink, getNavItemProps, onKeyDownForward, onKeyDownBack, onKeyDownLink }
 }
 
 export default useNavItems
