@@ -48,7 +48,7 @@ const NavItems: React.FC<INavItemsProps> = ({
 
         return (
           <NavItem key={i + index} itemsClassName={items?.classes?.items} {...navItemProps} renderLink={renderLink}>
-            {navItem.renderItem || navItem.name}
+            {navItem.renderItem || (navItemProps.itemProps?.children ?? navItem.name)}
           </NavItem>
         )
       })}

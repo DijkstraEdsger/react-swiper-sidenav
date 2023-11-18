@@ -73,7 +73,7 @@ const SideNav: React.FC<ISideNavProps> = ({
         <SideDrawer
           open={openSideDrawer}
           navItems={preProcessedNavItems as never[]}
-          clickedLink={variant === 'temporary' ? onClose : undefined}
+          clickedLink={variant === 'temporary' ? onClose : () => {}}
           menuHead={children}
           placement={placement}
           zIndex={zIndex}
