@@ -46,7 +46,7 @@ const useSideDrawer = ({ navItems, variant, placement, open }: SideDrawerProps):
   }, [open, placement])
 
   const cssPosition = useMemo<React.CSSProperties['position']>(
-    () => (variant === 'permanent' ? 'inherit' : 'fixed'),
+    () => (variant === 'temporary' ? 'fixed' : 'relative'),
     [variant],
   )
 

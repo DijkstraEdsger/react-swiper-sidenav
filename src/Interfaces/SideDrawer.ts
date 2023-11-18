@@ -1,4 +1,4 @@
-export type Variant = 'temporary' | 'persistent' | 'permanent'
+export type Variant = 'temporary' | 'permanent'
 export type Placement = 'left' | 'right'
 
 export interface ISideDrawerProps {
