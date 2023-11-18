@@ -46,7 +46,7 @@ const NavItem = ({
 
   if (renderLink) {
     newLink = React.cloneElement(renderLink(itemProps), {
-      onClick: disableClose ? undefined : clicked,
+      onClick: clicked,
       className: `MenuItem ${itemsClassName}`,
       role: 'menuitem',
     })
@@ -57,7 +57,7 @@ const NavItem = ({
       {children}
     </RenderItem>
   ) : (
-    newLink || (
+    newLink ?? (
       <MenuItem disableClose={disableClose} clicked={clicked} itemsClassName={itemsClassName} itemProps={itemProps}>
         {children}
       </MenuItem>
