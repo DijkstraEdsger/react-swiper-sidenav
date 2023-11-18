@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  transition: opacity 0.5s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .Visible {
@@ -16,18 +16,4 @@
 .Invisible {
   visibility: hidden;
   opacity: 0;
-  animation: invisible;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-}
-
-@keyframes invisible {
-  0% {
-    visibility: visible;
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
 }
