@@ -23,7 +23,7 @@ const useSideNav = ({ navItems, variant, hideBackdrop, open, spreadCssClasses }:
     () => (navItems ? preProcessNavItems(navItems, spreadCssClasses) : []),
     [navItems, spreadCssClasses],
   )
-  const className = useMemo(() => (variant === 'permanent' ? 'permanentDisplay' : 'fixedDisplay'), [variant])
+  const className = useMemo(() => (variant === 'permanent' ? 'displayBlock' : ''), [variant])
   const showBackdrop = useMemo(() => !hideBackdrop && variant !== 'permanent', [hideBackdrop, variant])
   const openSideDrawer = useMemo(() => open || variant === 'permanent', [open, variant])
 
