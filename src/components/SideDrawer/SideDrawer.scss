@@ -3,7 +3,7 @@
   background-color: white;
   height: 100vh;
   top: 0;
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
   overflow-x: hidden;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
 }
@@ -14,10 +14,12 @@
 
 .Open {
   transform: translateX(0);
+  visibility: visible;
 }
 
 .CloseLeft {
   transform: translateX(-100vw);
+  visibility: hidden;
 }
 
 .SideDrawerRight {
@@ -26,6 +28,7 @@
 
 .CloseRight {
   transform: translateX(100vw);
+  visibility: hidden;
 }
 
 @media (min-width: 500px) {
