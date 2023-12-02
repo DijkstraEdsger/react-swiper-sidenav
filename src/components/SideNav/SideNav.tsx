@@ -1,7 +1,6 @@
 import React from 'react'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import Backdrop from '../Backdrop/Backdrop'
-import './SideNav.scss'
 import useSideNav from './useSideNav'
 import { SideNavProvider } from 'contexts/SideNavContext'
 
@@ -54,7 +53,7 @@ const SideNav: React.FC<ISideNavProps> = ({
   spreadCssClasses = true,
   renderLink,
 }: ISideNavProps) => {
-  const { preProcessedNavItems, className, showBackdrop, openSideDrawer } = useSideNav({
+  const { preProcessedNavItems, showBackdrop, openSideDrawer } = useSideNav({
     navItems,
     variant,
     hideBackdrop,
@@ -68,7 +67,7 @@ const SideNav: React.FC<ISideNavProps> = ({
         renderLink,
       }}
     >
-      <div className={className}>
+      <div>
         {showBackdrop && <Backdrop clicked={onClose} show={open} zIndex={zIndex} />}
         <SideDrawer
           open={openSideDrawer}
@@ -77,7 +76,6 @@ const SideNav: React.FC<ISideNavProps> = ({
           menuHead={children}
           placement={placement}
           zIndex={zIndex}
-          variant={variant}
           style={style}
           navProps={navProps}
         />
