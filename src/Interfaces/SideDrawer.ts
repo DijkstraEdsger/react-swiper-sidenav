@@ -8,7 +8,6 @@ export interface ISideDrawerProps {
   placement: Placement
   zIndex: any
   menuHead: React.ReactNode
-  variant: Variant
   style: React.CSSProperties
   navProps?: React.HTMLAttributes<HTMLElement>
 }

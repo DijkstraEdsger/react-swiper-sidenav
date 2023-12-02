@@ -11,13 +11,11 @@ const SideDrawer = ({
   placement,
   zIndex,
   menuHead,
-  variant,
   style = {},
   navProps,
 }: ISideDrawerProps) => {
-  const { positions, className, cssPosition, slideForward, slideBackward } = useSideDrawer({
+  const { positions, className, slideForward, slideBackward } = useSideDrawer({
     navItems,
-    variant,
     placement,
     open,
   })
@@ -50,7 +48,7 @@ const SideDrawer = ({
       style={{
         zIndex,
         ...style,
-        position: cssPosition,
+        position: 'fixed',
       }}
     >
       {menuHead || null}

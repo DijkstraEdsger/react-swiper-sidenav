@@ -1,9 +1,8 @@
-import { Placement, Variant } from 'Interfaces/SideDrawer'
+import { Placement } from 'Interfaces/SideDrawer'
 import { useEffect, useMemo, useState } from 'react'
 
 type SideDrawerProps = {
   navItems: any[]
-  variant: Variant
   placement: Placement
   open: boolean
 }
@@ -11,12 +10,11 @@ type SideDrawerProps = {
 type SideDrawerReturn = {
   positions: string[]
   className: string
-  cssPosition: React.CSSProperties['position']
   slideForward: (parent: number, child: number) => void
   slideBackward: (parent: number, current: number) => void
 }
 
-const useSideDrawer = ({ navItems, variant, placement, open }: SideDrawerProps): SideDrawerReturn => {
+const useSideDrawer = ({ navItems, placement, open }: SideDrawerProps): SideDrawerReturn => {
   const [positions, setPositions] = useState<string[]>([])
 
   useEffect(() => {
@@ -45,15 +43,9 @@ const useSideDrawer = ({ navItems, variant, placement, open }: SideDrawerProps):
     return classesSideDrawer.join(' ')
   }, [open, placement])
 
-  const cssPosition = useMemo<React.CSSProperties['position']>(
-    () => (variant === 'temporary' ? 'fixed' : 'relative'),
-    [variant],
-  )
-
   return {
     positions,
     className,
-    cssPosition,
     slideForward,
     slideBackward,
   }
