@@ -47,7 +47,7 @@ const NavItem = ({
   if (renderLink) {
     newLink = React.cloneElement(renderLink(itemProps), {
       onClick: clicked,
-      className: `MenuItem ${itemsClassName}`,
+      className: `MenuItem ${itemsClassName} ${className}`,
       role: 'menuitem',
     })
   }
