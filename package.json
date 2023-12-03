@@ -14,7 +14,15 @@
     "type": "git",
     "url": "git+https://github.com/DijkstraEdsger/react-swiper-sidenav.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "sidenav",
+    "menu",
+    "navigation",
+    "drawer",
+    "react-swiper-sidenav",
+    "react-swiper-navigation"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
