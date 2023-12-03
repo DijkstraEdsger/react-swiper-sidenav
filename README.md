@@ -41,11 +41,5 @@ Check out the live demo here.
 Live Demo
 Check out the live demo here.
 
-Contributing
-Contributions are welcome! Please read the contributing guide to get started.
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 
 ```
