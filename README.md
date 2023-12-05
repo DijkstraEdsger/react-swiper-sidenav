@@ -17,7 +17,51 @@ yarn add react-swiper-sidenav
 To use react-swiper-sidenav, you need to import the `SideNav` component and pass it an object of type `NavItems` that defines the structure of your menus. You also need to provide an `onClose` function that handles the closing of the side navigation. Optionally, you can customize the appearance and behavior of the component by passing other props such as `open`, `placement`, `zIndex`, `navProps`, `variant`, etc. Here is an example of usage:
 
 ```jsx
-import { SideNav } from 'react-swiper-sidenav'
+import { SideNav, NavItems } from 'react-swiper-sidenav';
+import { Link } from "react-router-dom";
+
+type CustomLinkProps = {
+  to: string;
+  label?: string;
+};
+
+const CustomLink = ({ to, label }: CustomLinkProps) => {
+  return <Link to={to}>{label}</Link>;
+};
+
+const navItems: NavItems = {
+  name: "Main",
+  childrenItems: [
+    {
+      name: "Computers",
+      childrenItems: [
+        {
+          name: "Desktops",
+          childrenItems: [
+            {
+              itemProps: {
+                to: "/gaming",
+                label: "Gaming",
+              },
+            },
+            {
+              itemProps: {
+                to: "/workstations",
+                label: "Workstations",
+              },
+            },
+            {
+              itemProps: {
+                to: "/all-in-one",
+                label: "All-in-One",
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 function App() {
   return (
@@ -25,16 +69,15 @@ function App() {
       navItems={navItems}
       open={open}
       onClose={onClose}
-      placement='left'
-      zIndex={800}
-      navProps={navProps}
-      variant={variant}
+      renderLink={CustomLink}
     />
   )
 }
 ```
 
-You can see a live demo of the component here: [react-swiper-sidenav live demo](https://stackblitz.com/~/github.com/DijkstraEdsger/react-swiper-sidenav-live-demo).
+## Live demo
+
+You can see a live demo of the component here: [live demo](https://stackblitz.com/edit/stackblitz-starters-9aj2at).
 
 ## Props
 
